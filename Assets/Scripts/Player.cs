@@ -1,7 +1,6 @@
-using System.Data.Common;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using static FlipBlock;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +17,17 @@ public class Player : MonoBehaviour
 
     public float jumpLowEnd = 3f;
     public float jumpHighEnd = 24f;
+
+    public Transform leftRayOrigin;
+    public Transform rightRayOrigin;
+    public float rayLength = 0.05f;
+    public LayerMask groundLayer;
+    private bool grounded = false;
+
+    [SerializeField] private Slider power;
+
+    public Vector2 playerTrajectory = new Vector2(0.7f, 1f);
+    public Vector2 trajectory;
 
     public static Player Instance { get; private set; }
     private void Awake()
@@ -36,47 +46,49 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        trajectory = playerTrajectory;
     }
 
     private void Update()
     {
-        if(jumping)
+        GroundCheck();
+
+        if (jumping)
         {
             holding += Time.deltaTime * 10f;
+
+            power.SetValueWithoutNotify(holding/jumpHighEnd);
         }
 
-        //Movement();
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
-            animator.SetBool("Crouching", true);
             JumpHoldBegin();
         }
 
-
-
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && grounded)
         {
-            animator.SetBool("Crouching", false);
             JumpHoldEnd();
         }
 
-
-        if (rb.transform.position.y < -50)
+        if (rb.transform.position.y < -10f)
         {
             Respawn();
         }
     }
 
-
     private void JumpHoldBegin()
     {
         holding = 0;
         jumping = true;
+        animator.SetBool("Crouching", true);
+        power.gameObject.SetActive(true);
     }
 
     private void JumpHoldEnd()
     {
+        animator.SetBool("Crouching", false);
+        power.gameObject.SetActive(false);
         jumping = false;
         Jump();
     }
@@ -92,11 +104,11 @@ public class Player : MonoBehaviour
             holding = jumpLowEnd;
         }
 
-        rb.AddForce(new Vector2(0.7f, 0.7f) * holding, ForceMode2D.Impulse);
+        rb.AddForce(trajectory * holding, ForceMode2D.Impulse);
     }
 
 
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         FixedMovement();
     }
@@ -113,16 +125,56 @@ public class Player : MonoBehaviour
         if(moveForce != Vector2.zero)
         {
             rb.linearVelocity = moveForce;
-        } 
-        else
-        {
-            //rb.linearVelocity = Vector2.zero;
         }
-    }
+    }*/
 
     private void Respawn()
     {
         transform.position = startPOS;
         rb.linearVelocity = new Vector2(0,0);
+        FlipRight();
+    }
+
+    private void GroundCheck()
+    {
+        RaycastHit2D leftHit = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, groundLayer);
+        RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
+
+        grounded = leftHit.collider != null || rightHit.collider != null;
+
+        if(!grounded)
+        {
+            power.gameObject.SetActive(false);
+        }
+    }
+
+    private void FlipRight()
+    {
+        trajectory = playerTrajectory;
+        transform.localScale = new Vector2(1,1);
+    }
+
+    private void FlipLeft()
+    {
+        trajectory = new Vector2(playerTrajectory.x * -1, playerTrajectory.y);
+        transform.localScale = new Vector2(-1, 1);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        FlipBlock fb = collision.GetComponent<FlipBlock>();
+
+        if(fb != null)
+        {
+            FlipDirections direction = fb.GetDirection();
+
+            if(FlipDirections.Right == direction)
+            {
+                FlipRight();
+            } else
+            {
+                FlipLeft();
+            }
+        }
     }
 }
