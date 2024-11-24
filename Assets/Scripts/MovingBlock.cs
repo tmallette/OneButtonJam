@@ -28,7 +28,6 @@ public class MovingBlock : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Let the games begin");
         collision.transform.SetParent(transform);
     }
 
