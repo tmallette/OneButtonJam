@@ -16,7 +16,7 @@
 *.pidb
 *.booproj
 *.svd
-
+.vs/
 # Unity Asset Store tools
 [Aa]ssets/AssetStoreTools*
 
