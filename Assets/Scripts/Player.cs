@@ -5,15 +5,19 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    //referencet to player
     private Rigidbody2D rb;
+    private Animator animator;
+    //movement Vector
     private Vector2 movement;
+    //start position
+    private Vector2 startPOS = new Vector2(-4, 0);
+    // jump properties
     private float holding = 0f;
     private bool jumping = false;
 
-
     public float jumpLowEnd = 3f;
-    public float jumpHighEnd = 12f;
-
+    public float jumpHighEnd = 24f;
 
     public static Player Instance { get; private set; }
     private void Awake()
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -44,6 +49,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            animator.SetBool("Crouching", true);
             JumpHoldBegin();
         }
 
@@ -51,7 +57,14 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            animator.SetBool("Crouching", false);
             JumpHoldEnd();
+        }
+
+
+        if (rb.transform.position.y < -50)
+        {
+            Respawn();
         }
     }
 
@@ -83,11 +96,6 @@ public class Player : MonoBehaviour
     }
 
 
-
-
-
-
-
     private void FixedUpdate()
     {
         FixedMovement();
@@ -100,7 +108,7 @@ public class Player : MonoBehaviour
 
     private void FixedMovement()
     {
-        Vector2 moveForce = movement * 7f;
+        Vector2 moveForce = movement * 7f; 
 
         if(moveForce != Vector2.zero)
         {
@@ -110,5 +118,11 @@ public class Player : MonoBehaviour
         {
             //rb.linearVelocity = Vector2.zero;
         }
+    }
+
+    private void Respawn()
+    {
+        transform.position = startPOS;
+        rb.linearVelocity = new Vector2(0,0);
     }
 }
