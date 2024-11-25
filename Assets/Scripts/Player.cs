@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float rayLength = 0.05f;
     public LayerMask groundLayer;
     private bool grounded = false;
+    private Vector2 respawnPoint;
 
     [SerializeField] private Slider power;
 
@@ -130,8 +131,16 @@ public class Player : MonoBehaviour
 
     private void Respawn()
     {
-        transform.position = startPOS;
-        rb.linearVelocity = new Vector2(0,0);
+        //check for checkpoints
+        if (respawnPoint != null)
+        {
+            transform.position = respawnPoint;
+        }
+        else
+        {
+            transform.position = startPOS;                        
+        }
+        rb.linearVelocity = Vector2.zero;
         FlipRight();
     }
 
@@ -176,5 +185,12 @@ public class Player : MonoBehaviour
                 FlipLeft();
             }
         }
+    }  
+
+    public void setRespawnPoint (Vector2 position, bool facingRight)
+    {
+        //facingRight can be used later to make them face the correct direction
+        Player.Instance.respawnPoint = position;        
     }
+
 }
