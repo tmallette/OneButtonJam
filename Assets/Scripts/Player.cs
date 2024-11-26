@@ -7,8 +7,6 @@ public class Player : MonoBehaviour
     //referencet to player
     private Rigidbody2D rb;
     private Animator animator;
-    //movement Vector
-    private Vector2 movement;
     //start position
     private Vector2 startPOS = new Vector2(-4, 0);
     // jump properties
@@ -29,6 +27,10 @@ public class Player : MonoBehaviour
 
     public Vector2 playerTrajectory = new Vector2(0.7f, 1f);
     public Vector2 trajectory;
+
+    [SerializeField] private Sound jumpSound;
+    [SerializeField] private Sound deadSound;
+    [SerializeField] private Sound checkpointSound;
 
     public static Player Instance { get; private set; }
     private void Awake()
@@ -74,6 +76,7 @@ public class Player : MonoBehaviour
 
         if (rb.transform.position.y < -10f)
         {
+            AudioManager.Instance.PlaySFXClip(deadSound);
             Respawn();
         }
     }
@@ -91,6 +94,7 @@ public class Player : MonoBehaviour
         animator.SetBool("Crouching", false);
         power.gameObject.SetActive(false);
         jumping = false;
+        AudioManager.Instance.PlaySFXClip(jumpSound);
         Jump();
     }
 
@@ -108,28 +112,7 @@ public class Player : MonoBehaviour
         rb.AddForce(trajectory * holding, ForceMode2D.Impulse);
     }
 
-
-    /*private void FixedUpdate()
-    {
-        FixedMovement();
-    }
-
-    private void Movement()
-    {
-        movement = new Vector2 (Input.GetAxisRaw("Horizontal"), 0).normalized;
-    }
-
-    private void FixedMovement()
-    {
-        Vector2 moveForce = movement * 7f; 
-
-        if(moveForce != Vector2.zero)
-        {
-            rb.linearVelocity = moveForce;
-        }
-    }*/
-
-    private void Respawn()
+    public void Respawn()
     {
         //check for checkpoints
         if (respawnPoint != null)
@@ -187,10 +170,11 @@ public class Player : MonoBehaviour
         }
     }  
 
-    public void setRespawnPoint (Vector2 position, bool facingRight)
+    public void SetRespawnPoint (Vector2 position, bool facingRight)
     {
         //facingRight can be used later to make them face the correct direction
-        Player.Instance.respawnPoint = position;        
+        Player.Instance.respawnPoint = position;
+        AudioManager.Instance.PlaySFXClip(checkpointSound);
     }
 
 }
