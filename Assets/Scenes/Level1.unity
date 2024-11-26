@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 498676606}
   - component: {fileID: 498676608}
   m_Layer: 9
-  m_Name: Start
+  m_Name: Checkpoint 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   respawnPoint: {fileID: 593479396}
+  savePoint: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,7 +749,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.83, y: -0.21, z: -10}
+  m_LocalPosition: {x: -6.83, y: 1.79, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1453,6 +1454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   respawnPoint: {fileID: 907799486}
+  savePoint: 1
 --- !u!1 &766833381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1686,18 @@ MonoBehaviour:
   power: {fileID: 601483129}
   playerTrajectory: {x: 0.7, y: 1}
   trajectory: {x: 0, y: 0}
+  jumpSound:
+    clip: {fileID: 8300000, guid: a2ff9d2f25b4d9048823133e345ce0c9, type: 3}
+    loop: 0
+    playOnAwake: 0
+  deadSound:
+    clip: {fileID: 8300000, guid: a358a1d3c6f57844c86aada384db806f, type: 3}
+    loop: 0
+    playOnAwake: 0
+  checkpointSound:
+    clip: {fileID: 8300000, guid: 4a663e9dc351f79418419f6f33211866, type: 3}
+    loop: 0
+    playOnAwake: 0
 --- !u!95 &878933658
 Animator:
   serializedVersion: 7
@@ -2262,6 +2276,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9865d7e91362474a8253c315b45b505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music:
+    clip: {fileID: 8300000, guid: f068726c3a177e84084afa6818a66164, type: 3}
+    loop: 1
+    playOnAwake: 1
+  checkPoints:
+  - {fileID: 498676608}
+  - {fileID: 663243026}
 --- !u!4 &1148344672
 Transform:
   m_ObjectHideFlags: 0
@@ -3302,7 +3323,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 0, y: 2, z: 0}
   Damping: {x: 0, y: 0, z: 0}
   Lookahead:
     Enabled: 0
@@ -3361,7 +3382,7 @@ Transform:
   m_GameObject: {fileID: 1801703511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.83, y: -0.21, z: -10}
+  m_LocalPosition: {x: -6.83, y: 1.79, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

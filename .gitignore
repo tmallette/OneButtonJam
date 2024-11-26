@@ -6,17 +6,31 @@
 [Bb]uilds/
 [Ll]ogs/
 
+# Exclude user-specific settings
+UserSettings/
+
 # Auto-generated VS/VSCode project files
 *.csproj
 *.unityproj
 *.sln
 *.suo
+*.tmp
 *.user
 *.userprefs
 *.pidb
 *.booproj
 *.svd
 .vs/
+
+# Unity collab files
+*.collabignore
+
+# Unity cache files
+**/[Cc]ache/
+
+# Exclude local packages
+[Pp]ackages/com.unity.package-manager-ui
+
 # Unity Asset Store tools
 [Aa]ssets/AssetStoreTools*
 
@@ -24,8 +38,17 @@
 [Ll]ightmapSnapshot
 *.unitypackage
 
+# VS Code settings (if you're using it)
+.vscode/
+
 # Cache
 .aps/
 .vscode/extensions.json
 .vscode/launch.json
 .vscode/settings.json
+
+# MacOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
