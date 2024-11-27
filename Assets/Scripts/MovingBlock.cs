@@ -9,7 +9,6 @@ public class MovingBlock : MonoBehaviour {
     private int i;
     private  void Start()
     {
-        Debug.Log("Let the games begin");
         transform.position = points[startingPoint].position;
     }
 
@@ -28,7 +27,10 @@ public class MovingBlock : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.transform.SetParent(transform);
+        if (transform.position.y < collision.transform.position.y)
+        {
+            collision.transform.SetParent(transform);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
