@@ -9,7 +9,6 @@ public class MovingBlock : MonoBehaviour {
     private int i;
     private  void Start()
     {
-        Debug.Log("Let the games begin");
         transform.position = points[startingPoint].position;
     }
 

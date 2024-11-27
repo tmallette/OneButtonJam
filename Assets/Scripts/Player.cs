@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using static FlipBlock;
@@ -8,10 +9,11 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     //start position
-    private Vector2 startPOS = new Vector2(-4, 0);
+    public Vector2 startPOS;
     // jump properties
     private float holding = 0f;
-    private bool jumping = false;
+    private bool isJumping = false;
+    private bool holdingJump = false;
 
     public float jumpLowEnd = 3f;
     public float jumpHighEnd = 24f;
@@ -55,9 +57,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        GroundCheck();
 
-        if (jumping)
+
+        GroundCheck();
+        if (holdingJump)
         {
             holding += Time.deltaTime * 10f;
 
@@ -69,7 +72,7 @@ public class Player : MonoBehaviour
             JumpHoldBegin();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && grounded)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             JumpHoldEnd();
         }
@@ -83,19 +86,23 @@ public class Player : MonoBehaviour
 
     private void JumpHoldBegin()
     {
-        holding = 0;
-        jumping = true;
-        animator.SetBool("Crouching", true);
         power.gameObject.SetActive(true);
+        holding = 0;
+        holdingJump = true;
+        animator.SetBool("Crouching", true);
     }
 
     private void JumpHoldEnd()
     {
         animator.SetBool("Crouching", false);
-        power.gameObject.SetActive(false);
-        jumping = false;
-        AudioManager.Instance.PlaySFXClip(jumpSound);
-        Jump();
+        isJumping = true; 
+        if (grounded && holdingJump)
+        {
+            power.gameObject.SetActive(false);
+            holdingJump = false;
+            AudioManager.Instance.PlaySFXClip(jumpSound);
+            Jump();
+        }
     }
 
     private void Jump()
@@ -131,7 +138,8 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D leftHit = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, groundLayer);
         RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
-
+       
+        
         grounded = leftHit.collider != null || rightHit.collider != null;
 
         if(!grounded)
@@ -168,7 +176,17 @@ public class Player : MonoBehaviour
                 FlipLeft();
             }
         }
-    }  
+
+    }
+    private void OnCollisionEnter2D(Collision2D collisionObject)
+    {
+        Vector3 firstCollision = collisionObject.GetContact(0).normal;
+        if (firstCollision == Vector3.up)
+        {
+            isJumping = false;
+        }
+    }
+
 
     public void SetRespawnPoint (Vector2 position, bool facingRight)
     {
