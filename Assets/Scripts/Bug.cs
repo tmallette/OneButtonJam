@@ -57,7 +57,7 @@ public class Bug : MonoBehaviour
         bool result = false;
 
         if (isFacingLeft)
-        {         
+        { 
             leftHit = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, groundLayer);            
             if (leftHit.collider == null)
             {                
