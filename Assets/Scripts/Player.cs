@@ -196,11 +196,12 @@ public class Player : MonoBehaviour
         //facingRight can be used later to make them face the correct direction
         try
         {
-
+            Debug.Log("Set Respawn point to: " + position);
             Player.Instance.respawnPoint = position;
             AudioManager.Instance.PlaySFXClip(checkpointSound);
         }
         catch (Exception e) { 
+            Debug.LogException(e);
         }
     }
 
