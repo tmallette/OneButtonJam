@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
             {
                 AudioManager.Instance.PlaySFXClip(jumpSound);
             }
-            catch (Exception e)
+            catch (SystemException e)
             {
                 Debug.Log(e);
             }

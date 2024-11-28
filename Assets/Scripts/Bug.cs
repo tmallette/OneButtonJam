@@ -33,8 +33,7 @@ public class Bug : MonoBehaviour
     }
 
     private void moveBug ()
-    {
-        Debug.Log("move fucking bug");
+    {        
         if (isFacingLeft)
         {
             rb.linearVelocity = Vector2.left * Time.deltaTime * speed;

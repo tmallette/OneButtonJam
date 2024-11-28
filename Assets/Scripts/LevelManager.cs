@@ -44,8 +44,9 @@ public class LevelManager : MonoBehaviour
             Player.Instance.SetRespawnPoint(position, facing);
             Player.Instance.Respawn();
         }
-        catch {
-            Debug.Log("Something broke :(");
+        catch  
+        {
+            
         }
     }
 }
