@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  respawnPoint: {fileID: 0}
+  respawnPoint: {fileID: 593479396}
   savePoint: 0
 --- !u!1 &519420028
 GameObject:
@@ -1893,7 +1893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  respawnPoint: {fileID: 0}
+  respawnPoint: {fileID: 907799486}
   savePoint: 0
 --- !u!1 &707809645
 GameObject:
