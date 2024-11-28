@@ -12,10 +12,16 @@ public class Bug : MonoBehaviour
     public bool isFacingLeft = true;
     private bool bugMove = false;
     private Rigidbody2D rb;
+    public bool IsMovingDefault = true;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        animator.SetBool("IsWalkiing", IsMovingDefault);
     }
 
     private void Update()
@@ -59,7 +65,9 @@ public class Bug : MonoBehaviour
         { 
             leftHit = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, groundLayer);            
             if (leftHit.collider == null)
-            {                
+            {
+                spriteRenderer.flipX = false;
+                animator.SetBool("IsWalkiing", true);
                 //turn right
                 isFacingLeft = false;
             }
@@ -74,7 +82,9 @@ public class Bug : MonoBehaviour
             if (rightHit.collider == null)
             {
                 //turn left
+                spriteRenderer.flipX = true;
                 isFacingLeft = true;
+                animator.SetBool("IsWalkiing", true);
             }
             else
             {
@@ -85,4 +95,7 @@ public class Bug : MonoBehaviour
         return result;
 
     }
+        
+
 }
+

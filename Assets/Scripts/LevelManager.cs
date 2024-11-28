@@ -32,17 +32,24 @@ public class LevelManager : MonoBehaviour
             UIManager.Instance.ToggleStartMenu(false);
         }
 
-        if(GameDataManager.Instance != null) 
+        if (GameDataManager.Instance != null)
         {
             respawnPoint = GameDataManager.Instance.respawnPoint;
         }
         try
         {
+            //if(respawnPoint == -1)
+            //{
+            Debug.Log("checkPoints: " + checkPoints.Length);
+            Debug.Log("respawnPoint: " + respawnPoint);
             bool facing = checkPoints[respawnPoint].GetFacing();
-            Vector2 position = checkPoints[respawnPoint].GetPosition();
+                Vector2 position = checkPoints[respawnPoint].GetPosition();
 
-            Player.Instance.SetRespawnPoint(position, facing);
+                Player.Instance.SetRespawnPoint(position, facing);
+                
+            //}
             Player.Instance.Respawn();
+
         }
         catch  
         {
