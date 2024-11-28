@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
             power.SetValueWithoutNotify(holding/jumpHighEnd);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && grounded)
+        if (Input.GetKeyDown(KeyCode.Space) && grounded && !isJumping)
         {
             JumpHoldBegin();
         }
@@ -95,12 +95,19 @@ public class Player : MonoBehaviour
     private void JumpHoldEnd()
     {
         animator.SetBool("Crouching", false);
-        isJumping = true; 
         if (grounded && holdingJump)
         {
+            isJumping = true;
             power.gameObject.SetActive(false);
             holdingJump = false;
-            AudioManager.Instance.PlaySFXClip(jumpSound);
+            try
+            {
+                AudioManager.Instance.PlaySFXClip(jumpSound);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
             Jump();
         }
     }
@@ -141,11 +148,6 @@ public class Player : MonoBehaviour
        
         
         grounded = leftHit.collider != null || rightHit.collider != null;
-
-        if(!grounded)
-        {
-            power.gameObject.SetActive(false);
-        }
     }
 
     private void FlipRight()
@@ -178,6 +180,7 @@ public class Player : MonoBehaviour
         }
 
     }
+    
     private void OnCollisionEnter2D(Collision2D collisionObject)
     {
         Vector3 firstCollision = collisionObject.GetContact(0).normal;
@@ -191,8 +194,14 @@ public class Player : MonoBehaviour
     public void SetRespawnPoint (Vector2 position, bool facingRight)
     {
         //facingRight can be used later to make them face the correct direction
-        Player.Instance.respawnPoint = position;
-        AudioManager.Instance.PlaySFXClip(checkpointSound);
+        try
+        {
+
+            Player.Instance.respawnPoint = position;
+            AudioManager.Instance.PlaySFXClip(checkpointSound);
+        }
+        catch (Exception e) { 
+        }
     }
 
 }

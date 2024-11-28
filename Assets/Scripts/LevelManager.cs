@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        if (music != null)
+        if (music != null && AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayMusic(music);
         }
@@ -36,11 +36,16 @@ public class LevelManager : MonoBehaviour
         {
             respawnPoint = GameDataManager.Instance.respawnPoint;
         }
+        try
+        {
+            bool facing = checkPoints[respawnPoint].GetFacing();
+            Vector2 position = checkPoints[respawnPoint].GetPosition();
 
-        bool facing = checkPoints[respawnPoint].GetFacing();
-        Vector2 position = checkPoints[respawnPoint].GetPosition();
-
-        Player.Instance.SetRespawnPoint(position, facing);
-        Player.Instance.Respawn();
+            Player.Instance.SetRespawnPoint(position, facing);
+            Player.Instance.Respawn();
+        }
+        catch {
+            Debug.Log("Something broke :(");
+        }
     }
 }

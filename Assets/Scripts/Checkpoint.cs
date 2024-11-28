@@ -11,11 +11,9 @@ public class Checkpoint : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if (player != null)
         {
-            if(savePoint != GameDataManager.Instance.respawnPoint)
-            {
-                GameDataManager.Instance.SaveGame(savePoint);
+            if (GameDataManager.Instance != null && savePoint != GameDataManager.Instance.respawnPoint){
+                 GameDataManager.Instance.SaveGame(savePoint);
             }
-
             Player.Instance.SetRespawnPoint(respawnPoint.transform.position, facingRight);
         }
     }   
