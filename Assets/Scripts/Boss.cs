@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using static Unity.Cinemachine.CinemachineOrbitalTransposer;
 
@@ -11,9 +12,10 @@ public class Boss : MonoBehaviour
     public float rayLength = 0.05f;
     public float speed = 50f;
     public bool triggered = false;
-    public BossChat bossChat;    
+    public BossChat bossChat;
 
     //You can set the jump power values for the boss based on what level design we come up with
+    private bool bossPaused = false;
     private float[] bossJumps = new float[] {9f,10f,30f};
     private float[] bossPause = new float[] {5f,10f};
     private int jumpIndex = 0;
@@ -53,13 +55,14 @@ public class Boss : MonoBehaviour
         }        
 
         //movement logic
-        if (startBoss)
+        if (startBoss && !bossPaused)
         {
             if (isBossAtEdge())
             {
                 if (!isJumping)
                 {
                     isJumping = true;
+                    Debug.Log("Bug just jumped! isJumping=" + isJumping);
                     Jump();
                 }
             }
@@ -106,6 +109,7 @@ public class Boss : MonoBehaviour
         {
             if (isJumping)
             {
+                Debug.Log("Bug just landed!");
                 //first time we detect ground after the boss lands, pause so he can huff and puff for X seconds                         
                 BossPause(pauseIndex);
                 pauseIndex += 1;
@@ -119,20 +123,24 @@ public class Boss : MonoBehaviour
 
     IEnumerator BossPauseTimer (float timeToPause)
     {
+        bossPaused = true;
         yield return new WaitForSeconds(timeToPause);
         //add animator for huff and puff animation
+
+        bossPaused = false;
     }
 
     private void BossPause (int pIndex)
     {
+        float ttp = 0f;
         try
         {
-            float ttp = bossPause[pIndex];
-            BossPauseTimer(ttp);
+            ttp = bossPause[pIndex];
+            StartCoroutine(BossPauseTimer(ttp));
         }
         catch
         {
-            pauseIndex = 0;
-        }
+            pauseIndex = 0;            
+        }        
     }
 }
