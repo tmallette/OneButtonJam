@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a02c7249046b9e04592535568d32618f
+guid: 5fdca74771bf3de4ca6b37085e4eaf58
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,10 +116,10 @@ TextureImporter:
       name: warehousebug2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 271
-        height: 261
+        x: 29
+        y: 9
+        width: 262
+        height: 262
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3cb331b593e729b4685ce152a355eabe
+    spriteID: 9a7cd9f9fdff0db41bfa2e09af1c3af4
     internalID: 0
     vertices: []
     indices: 

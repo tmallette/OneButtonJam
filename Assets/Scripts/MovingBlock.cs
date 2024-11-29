@@ -35,6 +35,9 @@ public class MovingBlock : MonoBehaviour {
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collision.transform.SetParent(null);
+        if(collision.transform.parent != null)
+        {
+            collision.transform.SetParent(null);
+        }
     }
 }

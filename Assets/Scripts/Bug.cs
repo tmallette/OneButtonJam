@@ -12,16 +12,17 @@ public class Bug : MonoBehaviour
     public bool isFacingLeft = true;
     private bool bugMove = false;
     private Rigidbody2D rb;
-    public bool IsMovingDefault = true;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private bool triggered = false;
+    public bool isFriendly = true;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        animator.SetBool("IsWalkiing", IsMovingDefault);
+        animator.SetBool("IsWalking", true);
     }
 
     private void Update()
@@ -31,6 +32,13 @@ public class Bug : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //check if the player is no longer colliding with bug
+
+        if (triggered)
+        {
+            return;
+        }
+
         bugMove = checkGround();
         if (bugMove)
         {
@@ -38,6 +46,10 @@ public class Bug : MonoBehaviour
         }        
     }
 
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
     private void moveBug ()
     {        
         if (isFacingLeft)
@@ -67,7 +79,6 @@ public class Bug : MonoBehaviour
             if (leftHit.collider == null)
             {
                 spriteRenderer.flipX = false;
-                animator.SetBool("IsWalkiing", true);
                 //turn right
                 isFacingLeft = false;
             }
@@ -84,7 +95,6 @@ public class Bug : MonoBehaviour
                 //turn left
                 spriteRenderer.flipX = true;
                 isFacingLeft = true;
-                animator.SetBool("IsWalkiing", true);
             }
             else
             {
@@ -95,7 +105,20 @@ public class Bug : MonoBehaviour
         return result;
 
     }
-        
 
+    //when this is called the bug is being talked to, so before we return it's value we set it to triggered
+    //and set it's velocity to zero
+    public bool IsBugFriendly ()
+    {
+        triggered = true;
+        rb.linearVelocity = Vector2.zero;
+
+        return isFriendly;
+    }
+
+    public void ReactiveBug ()
+    {
+        triggered = false;
+    }
 }
 
