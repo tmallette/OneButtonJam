@@ -13,4 +13,15 @@ public class ActivateBug : MonoBehaviour
             isTriggered = true;
         }
     }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {        
+        Bug bug = GetComponentInParent<Bug>();
+        if (!bug.IsBugFriendly())
+        {
+            bug.ReactiveBug();
+            chat.ToggleCanvas(false);
+            isTriggered = false;
+        }
+    }    
 }

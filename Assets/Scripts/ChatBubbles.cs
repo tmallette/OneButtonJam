@@ -14,10 +14,9 @@ public class ChatBubbles : MonoBehaviour
 
     public void ToggleCanvas (bool toggle)
     {
-        
+        bug = GetComponentInParent<Bug>();
         if (toggle)
-        {
-            bug = GetComponentInParent<Bug>();
+        {            
             bool isProProletariat = bug.IsBugFriendly();
             if (isProProletariat)
             {
@@ -35,7 +34,11 @@ public class ChatBubbles : MonoBehaviour
                 bug.GetAnimator().SetBool("IsWalking", false);
             }
         }
-
+        else
+        {
+            gameObject.SetActive(toggle);
+            bug.GetAnimator().SetBool("IsWalking", true);
+        }
     }
 
     IEnumerator CanvasTimer()

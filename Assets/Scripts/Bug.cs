@@ -32,6 +32,8 @@ public class Bug : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //check if the player is no longer colliding with bug
+
         if (triggered)
         {
             return;
@@ -114,5 +116,9 @@ public class Bug : MonoBehaviour
         return isFriendly;
     }
 
+    public void ReactiveBug ()
+    {
+        triggered = false;
+    }
 }
 

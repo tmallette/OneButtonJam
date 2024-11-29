@@ -3449,7 +3449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 2110014845}
-  bug: {fileID: 0}
+  bug: {fileID: 1398191141}
 --- !u!1 &1148344670
 GameObject:
   m_ObjectHideFlags: 0
