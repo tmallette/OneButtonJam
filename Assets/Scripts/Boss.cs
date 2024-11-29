@@ -62,12 +62,15 @@ public class Boss : MonoBehaviour
                 if (!isJumping)
                 {
                     isJumping = true;
+                    animator.SetBool("IsMoving", false);
+                    animator.SetBool("IsFlying", true);
                     Debug.Log("Bug just jumped! isJumping=" + isJumping);
                     Jump();
                 }
             }
             else
             {
+                animator.SetBool("IsMoving", true);
                 rb.linearVelocity = speed * Vector2.right * Time.deltaTime;
             }
         }
@@ -109,6 +112,8 @@ public class Boss : MonoBehaviour
         {
             if (isJumping)
             {
+
+                animator.SetBool("IsFlying", false);
                 Debug.Log("Bug just landed!");
                 //first time we detect ground after the boss lands, pause so he can huff and puff for X seconds                         
                 BossPause(pauseIndex);
@@ -123,10 +128,12 @@ public class Boss : MonoBehaviour
 
     IEnumerator BossPauseTimer (float timeToPause)
     {
+
         bossPaused = true;
+        animator.SetBool("IsBreathing", true);
         yield return new WaitForSeconds(timeToPause);
         //add animator for huff and puff animation
-
+        animator.SetBool("IsBreathing", false);
         bossPaused = false;
     }
 
