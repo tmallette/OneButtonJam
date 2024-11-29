@@ -12,7 +12,6 @@ public class Bug : MonoBehaviour
     public bool isFacingLeft = true;
     private bool bugMove = false;
     private Rigidbody2D rb;
-    public bool IsMovingDefault = true;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private bool triggered = false;
@@ -23,7 +22,7 @@ public class Bug : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        animator.SetBool("IsWalkiing", IsMovingDefault);        
+        animator.SetBool("IsWalking", true);
     }
 
     private void Update()
@@ -45,6 +44,10 @@ public class Bug : MonoBehaviour
         }        
     }
 
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
     private void moveBug ()
     {        
         if (isFacingLeft)
@@ -74,7 +77,6 @@ public class Bug : MonoBehaviour
             if (leftHit.collider == null)
             {
                 spriteRenderer.flipX = false;
-                animator.SetBool("IsWalkiing", true);
                 //turn right
                 isFacingLeft = false;
             }
@@ -91,7 +93,6 @@ public class Bug : MonoBehaviour
                 //turn left
                 spriteRenderer.flipX = true;
                 isFacingLeft = true;
-                animator.SetBool("IsWalkiing", true);
             }
             else
             {
