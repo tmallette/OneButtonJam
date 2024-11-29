@@ -15,13 +15,15 @@ public class Bug : MonoBehaviour
     public bool IsMovingDefault = true;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private bool triggered = false;
+    public bool isFriendly = true;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        animator.SetBool("IsWalkiing", IsMovingDefault);
+        animator.SetBool("IsWalkiing", IsMovingDefault);        
     }
 
     private void Update()
@@ -31,6 +33,11 @@ public class Bug : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (triggered)
+        {
+            return;
+        }
+
         bugMove = checkGround();
         if (bugMove)
         {
@@ -95,7 +102,16 @@ public class Bug : MonoBehaviour
         return result;
 
     }
-        
+
+    //when this is called the bug is being talked to, so before we return it's value we set it to triggered
+    //and set it's velocity to zero
+    public bool IsBugFriendly ()
+    {
+        triggered = true;
+        rb.linearVelocity = Vector2.zero;
+
+        return isFriendly;
+    }
 
 }
 
