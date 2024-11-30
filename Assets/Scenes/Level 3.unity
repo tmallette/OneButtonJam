@@ -4229,8 +4229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb9090126908474f80b0d429008c4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  your_camera: {fileID: 0}
+  player: {fileID: 878933656}
+  your_camera: {fileID: 519420031}
   parallax_value: -0.1
 --- !u!95 &1196127868
 Animator:
