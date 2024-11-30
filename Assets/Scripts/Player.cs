@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
             JumpHoldEnd();
         }
 
-        if (rb.transform.position.y < -10f)
+        if (rb.transform.position.y < -25f || rb.transform.position.y < -20f || rb.transform.position.y > 180f)
         {
             AudioManager.Instance.PlaySFXClip(deadSound);
             Respawn();
