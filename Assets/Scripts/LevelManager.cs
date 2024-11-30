@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
+using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private Sound music;
     [SerializeField] private Checkpoint[] checkPoints;
+    [SerializeField] private Transform startPosition;
     private int respawnPoint = -1;
+    private bool startOfLevel = true;
 
     public static LevelManager Instance { get; private set; }
 
@@ -37,14 +41,24 @@ public class LevelManager : MonoBehaviour
         {
             respawnPoint = GameDataManager.Instance.respawnPoint;
         }
-
-        if(respawnPoint > -1)
+        if (startOfLevel)
         {
-            bool facing = checkPoints[respawnPoint].GetFacing();
-            Vector2 position = checkPoints[respawnPoint].GetPosition();
-
-            Player.Instance.SetRespawnPoint(position, facing);
+            startOfLevel = false;
+            Player.Instance.SetRespawnPoint(new Vector2(startPosition.position.x,startPosition.position.y), true);
             Player.Instance.Respawn();
+        }
+        else
+        {
+            if (respawnPoint > -1)
+            {
+                Debug.Log("checkPoints.Length " + checkPoints.Length);
+                Debug.Log("respawnPoint " + respawnPoint);
+                bool facing = checkPoints[respawnPoint].GetFacing();
+                Vector2 position = checkPoints[respawnPoint].GetPosition();
+
+                Player.Instance.SetRespawnPoint(position, facing);
+                Player.Instance.Respawn();
+            }
         }
     }
 }

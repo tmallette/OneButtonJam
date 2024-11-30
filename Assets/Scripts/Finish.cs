@@ -7,7 +7,9 @@ public class Finish : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision.transform.tag);
-        if (collision.transform.CompareTag("Player"))
+        Debug.Log(collision.GetContact(0).normal);
+        Vector3 firstCollision = collision.GetContact(0).normal;
+        if (collision.transform.CompareTag("Player") && firstCollision == Vector3.down)
         {
             SceneManager.LoadScene(NextLevel);
             Debug.Log("You've Finished the level :)");

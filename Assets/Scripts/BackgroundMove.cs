@@ -29,7 +29,7 @@ public class Parallax : MonoBehaviour
             startposition.x -= length.x;
         }
         relative_pos.z = startposition.z; 
-        relative_pos.y = player.position.y + 10f + parallax_value/2;
+        relative_pos.y = player.position.y + parallax_value/2;
         transform.position = startposition + relative_pos;
 
     }
