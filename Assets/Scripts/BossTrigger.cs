@@ -6,7 +6,7 @@ public class BossTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Boss boss = GetComponentInParent<Boss>();
-        if (boss.triggered == false)
+        if (!boss.triggered)
         {            
             bossChat.ToggleChat(true);
         }

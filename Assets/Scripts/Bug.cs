@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Cinemachine.CinemachineOrbitalTransposer;
 
 public class Bug : MonoBehaviour
 {
@@ -25,15 +23,9 @@ public class Bug : MonoBehaviour
         animator.SetBool("IsWalking", true);
     }
 
-    private void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         //check if the player is no longer colliding with bug
-
         if (triggered)
         {
             return;
@@ -50,6 +42,8 @@ public class Bug : MonoBehaviour
     {
         return animator;
     }
+
+
     private void moveBug ()
     {        
         if (isFacingLeft)

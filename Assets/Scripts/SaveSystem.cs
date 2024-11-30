@@ -1,26 +1,33 @@
 using System;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public static class SaveSystem
 {
-   public static int LoadData()
+   public static int[] LoadData()
     {
         string save = PlayerPrefs.GetString(Application.productName + "_Save");
+
+        // Start at -1 respawn and scene 1.
+        int[] saveData = new int[] { -1, 1};
 
         if(save != null) {
             try
             {
                 SaveData sd = JsonUtility.FromJson<SaveData>(save);
-                return sd.respawnPoint;
+
+                saveData[0] = sd.respawnPoint;
+                saveData[1] = sd.scene;
+
+                return saveData;
             } 
             catch
             {
-                return 0;
+               
+                return saveData;
             }
         }
 
-        return 0;
+        return saveData;
     }
 
     public static void SaveData(SaveData _sd)
@@ -35,4 +42,5 @@ public static class SaveSystem
 public class SaveData
 {
     public int respawnPoint;
+    public int scene;
 }

@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static FlipBlock;
 
 public class Player : MonoBehaviour
 {
@@ -57,14 +55,18 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
-
         GroundCheck();
-        if (holdingJump)
+        if (holdingJump && grounded)
         {
             holding += Time.deltaTime * 10f;
 
             power.SetValueWithoutNotify(holding/jumpHighEnd);
+        }
+        else
+        {
+            power.gameObject.SetActive(false);
+            animator.SetBool("Crouching", false);
+            holdingJump = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded && !isJumping)
@@ -72,14 +74,17 @@ public class Player : MonoBehaviour
             JumpHoldBegin();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && grounded)
         {
             JumpHoldEnd();
         }
 
-        if (rb.transform.position.y < -25f || rb.transform.position.y < -20f || rb.transform.position.y > 180f)
+        if (rb.transform.position.y < -25f || rb.transform.position.x < -20f || rb.transform.position.x > 180f)
         {
-            AudioManager.Instance.PlaySFXClip(deadSound);
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFXClip(deadSound);
+            }
             Respawn();
         }
     }
@@ -100,14 +105,12 @@ public class Player : MonoBehaviour
             isJumping = true;
             power.gameObject.SetActive(false);
             holdingJump = false;
-            try
+
+            if(AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlaySFXClip(jumpSound);
             }
-            catch (SystemException e)
-            {
-                Debug.Log(e);
-            }
+
             Jump();
         }
     }
@@ -145,40 +148,20 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D leftHit = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, groundLayer);
         RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
-       
         
         grounded = leftHit.collider != null || rightHit.collider != null;
     }
 
-    private void FlipRight()
+    public void FlipRight()
     {
         trajectory = playerTrajectory;
         transform.localScale = new Vector2(1,1);
     }
 
-    private void FlipLeft()
+    public void FlipLeft()
     {
         trajectory = new Vector2(playerTrajectory.x * -1, playerTrajectory.y);
         transform.localScale = new Vector2(-1, 1);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        FlipBlock fb = collision.GetComponent<FlipBlock>();
-
-        if(fb != null)
-        {
-            FlipDirections direction = fb.GetDirection();
-
-            if(FlipDirections.Right == direction)
-            {
-                FlipRight();
-            } else
-            {
-                FlipLeft();
-            }
-        }
-
     }
     
     private void OnCollisionEnter2D(Collision2D collisionObject)
@@ -190,19 +173,14 @@ public class Player : MonoBehaviour
         }
     }
 
-
     public void SetRespawnPoint (Vector2 position, bool facingRight)
     {
         //facingRight can be used later to make them face the correct direction
-        try
+        respawnPoint = position;
+
+        if (AudioManager.Instance != null)
         {
-            Debug.Log("Set Respawn point to: " + position);
-            Player.Instance.respawnPoint = position;
             AudioManager.Instance.PlaySFXClip(checkpointSound);
         }
-        catch (Exception e) { 
-            Debug.LogException(e);
-        }
     }
-
 }

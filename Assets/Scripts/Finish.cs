@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Finish : MonoBehaviour
 {
@@ -13,12 +12,5 @@ public class Finish : MonoBehaviour
             SceneManager.LoadScene(NextLevel);
             Debug.Log("You've Finished the level :)");
         }
-    }
-    private void Start() { }
-
-    private void Update()
-    {
-
-
     }
 }

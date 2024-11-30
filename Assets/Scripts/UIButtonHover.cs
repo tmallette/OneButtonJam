@@ -9,7 +9,7 @@ public class UIButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        EventSystem.current.SetSelectedGameObject(this.gameObject);
+        EventSystem.current.SetSelectedGameObject(gameObject);
     }
 
     public void OnPointerExit(PointerEventData eventData) {}
