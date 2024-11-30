@@ -12,16 +12,16 @@ public class Player : MonoBehaviour
     private float holding = 0f;
     private bool isJumping = false;
     private bool holdingJump = false;
-
     public float jumpLowEnd = 3f;
     public float jumpHighEnd = 24f;
-
     public Transform leftRayOrigin;
     public Transform rightRayOrigin;
     public float rayLength = 0.05f;
     public LayerMask groundLayer;
+    public LayerMask finalPlatformLayer;
     private bool grounded = false;
     private Vector2 respawnPoint;
+    private bool isOnFinalPlatform = false;
 
     [SerializeField] private Slider power;
 
@@ -91,6 +91,11 @@ public class Player : MonoBehaviour
 
     private void JumpHoldBegin()
     {
+        if (isOnFinalPlatform)
+        {
+            return;
+        }
+
         power.gameObject.SetActive(true);
         holding = 0;
         holdingJump = true;
@@ -99,6 +104,11 @@ public class Player : MonoBehaviour
 
     private void JumpHoldEnd()
     {
+        if (isOnFinalPlatform)
+        {
+            return;
+        }
+
         animator.SetBool("Crouching", false);
         if (grounded && holdingJump)
         {
@@ -150,6 +160,14 @@ public class Player : MonoBehaviour
         RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
         
         grounded = leftHit.collider != null || rightHit.collider != null;
+
+        RaycastHit2D leftHitFinalPlatform = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, finalPlatformLayer);
+        RaycastHit2D rightHitFinalPlatform = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, finalPlatformLayer);
+
+        if (leftHitFinalPlatform.collider != null || rightHitFinalPlatform.collider != null)
+        {
+            isOnFinalPlatform = true;
+        }
     }
 
     public void FlipRight()
