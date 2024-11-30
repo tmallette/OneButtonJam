@@ -14,6 +14,7 @@ public class Bug : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool triggered = false;
     public bool isFriendly = true;
+    public bool isFinalBug;
 
     private void Start()
     {

@@ -1003,6 +1003,7 @@ MonoBehaviour:
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 48fffeff3c07ffff0408ffff1e1fffffde26ffff8438ffff68a4ffffacd3ffff04daffffa0daffffe2f8ffff08bc00008ebc00009ac40000eac4000098c50000a8c5000014c6000022c6000068c6000098c600004ac7000076c70000f8c7000048c80000dcc800000cc90000bcc90000c4c900002cca0000a6010100d6010100da01010088020100d80201002e040100
+
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
