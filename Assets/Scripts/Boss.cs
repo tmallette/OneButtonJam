@@ -16,8 +16,8 @@ public class Boss : MonoBehaviour
 
     //You can set the jump power values for the boss based on what level design we come up with
     private bool bossPaused = false;
-    private float[] bossJumps = new float[] {9f,10f,30f};
-    private float[] bossPause = new float[] {5f,10f};
+    private float[] bossJumps = new float[] {11.3f,4.5f,4.5f,15f,9f};
+    private float[] bossPause = new float[] {7f,4f,4f,5f,4f};
     private int jumpIndex = 0;
     private int pauseIndex = 0;    
     private bool isJumping = false;
