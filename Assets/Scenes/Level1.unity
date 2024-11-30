@@ -1589,7 +1589,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &217353403
 Animator:
   serializedVersion: 7
@@ -2374,7 +2375,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &235255101
 Animator:
   serializedVersion: 7
@@ -2868,7 +2870,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &265845972
 Animator:
   serializedVersion: 7
@@ -4327,7 +4330,7 @@ Transform:
   m_GameObject: {fileID: 498676604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.14, y: -9.19, z: 0}
+  m_LocalPosition: {x: -3.84, y: -9.17, z: 0}
   m_LocalScale: {x: 1, y: 1.0439, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4924,7 +4927,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &542717884
 Animator:
   serializedVersion: 7
@@ -6246,6 +6250,7 @@ MonoBehaviour:
   speed: 50
   isFacingLeft: 0
   isFriendly: 1
+  isFinalBug: 0
 --- !u!212 &610571904
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6509,7 +6514,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 0000000009b7cf24
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -7099,7 +7104,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &690017913
 Animator:
   serializedVersion: 7
@@ -8425,7 +8431,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 0000000009b7cf24
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -10616,7 +10622,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &1112625009
 Animator:
   serializedVersion: 7
@@ -10840,6 +10847,7 @@ GameObject:
   - component: {fileID: 1135497330}
   - component: {fileID: 1135497329}
   - component: {fileID: 1135497328}
+  - component: {fileID: 1135497331}
   m_Layer: 0
   m_Name: WarehouseBG1 (1)
   m_TagString: Untagged
@@ -10910,16 +10918,16 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 617592585
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4662167665241651457, guid: 6d0b96f4f0ada3b438defba2d7584e8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 221.2808, y: 74.85895}
-  m_AdaptiveModeThreshold: 0.5
+  m_Size: {x: 251.12337, y: 0.3848679}
+  m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
@@ -10933,12 +10941,27 @@ Transform:
   m_GameObject: {fileID: 1135497327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 78.36516, y: -1.7345867, z: 0.05612267}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 84.5, y: -9.7, z: 0.05612267}
+  m_LocalScale: {x: 1, y: 56.92, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1135497331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135497327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb9090126908474f80b0d429008c4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 878933656}
+  your_camera: {fileID: 519420031}
+  parallax_value: -0.1
 --- !u!1 &1147004520
 GameObject:
   m_ObjectHideFlags: 0
@@ -11841,7 +11864,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!212 &1234431253
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13504,7 +13528,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!212 &1398191142
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15268,6 +15293,7 @@ MonoBehaviour:
   speed: 50
   isFacingLeft: 0
   isFriendly: 1
+  isFinalBug: 0
 --- !u!95 &1560552234
 Animator:
   serializedVersion: 7
@@ -17203,7 +17229,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!212 &1781393059
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18720,7 +18747,8 @@ MonoBehaviour:
   rayLength: 0.05
   speed: 50
   isFacingLeft: 0
-  isFriendly: 1
+  isFriendly: 0
+  isFinalBug: 0
 --- !u!95 &1950338036
 Animator:
   serializedVersion: 7

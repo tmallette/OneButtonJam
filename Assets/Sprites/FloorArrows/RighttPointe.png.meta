@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6d0b96f4f0ada3b438defba2d7584e8d
+guid: 40a3abb7c479a964ab02113cd625cb2b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4662167665241651457
-    second: Warehouse_0
+      213: 1203885943499403455
+    second: RighttPointe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Warehouse_0
+      name: RighttPointe_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 6000
-        height: 6000
+        x: 23
+        y: 59
+        width: 158
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1097a025ac853b040800000000000000
-      internalID: 4662167665241651457
+      spriteID: fb03e5c13ef05b010800000000000000
+      internalID: 1203885943499403455
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Warehouse_0: 4662167665241651457
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

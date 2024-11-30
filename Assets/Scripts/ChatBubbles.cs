@@ -53,7 +53,7 @@ public class ChatBubbles : MonoBehaviour
 
     IEnumerator CanvasTimer()
     {
-        yield return new WaitForSeconds(3f); 
+        yield return new WaitForSeconds(6f); 
         gameObject.SetActive(false);
         bug.GetAnimator().SetBool("IsDead", true);
     }
