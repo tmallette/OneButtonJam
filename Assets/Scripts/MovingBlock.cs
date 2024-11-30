@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MovingBlock : MonoBehaviour {
 
-    public float speed;
-    public int startingPoint;
+    public float speed = 2f;
+    public int startingPoint = 0;
     public Transform[] points;
 
-    private int i;
+    private int i = 0;
     private  void Start()
     {
         transform.position = points[startingPoint].position;

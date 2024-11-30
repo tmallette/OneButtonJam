@@ -10,8 +10,20 @@ public class FlipBlock : MonoBehaviour
         Right
     }
 
-    public FlipDirections GetDirection()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        return direction;
+        Player p = collision.GetComponent<Player>();
+
+        if (p != null)
+        {
+            if (direction == FlipDirections.Left)
+            {
+                p.FlipLeft();
+            }
+            else
+            {
+                p.FlipRight();
+            }
+        }
     }
 }

@@ -1,9 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using static Unity.Cinemachine.CinemachineOrbitalTransposer;
-
 public class Boss : MonoBehaviour
 {
     public Transform leftRayOrigin;
@@ -86,24 +82,17 @@ public class Boss : MonoBehaviour
 
     private void Jump ()
     {
-        try
-        {
-            rb.linearVelocity = Vector2.zero;
-            float jumpPower = bossJumps[jumpIndex];
-            rb.AddForce(new Vector2(0.7f, 1f) * jumpPower, ForceMode2D.Impulse);
-            jumpIndex += 1;            
-        }
-        catch 
-        {
-            jumpIndex = 0;
-        }
+        rb.linearVelocity = Vector2.zero;
+        float jumpPower = bossJumps[jumpIndex];
+        rb.AddForce(new Vector2(0.7f, 1f) * jumpPower, ForceMode2D.Impulse);
+
+        jumpIndex = (jumpIndex + 1) % bossJumps.Length;
     }
     private bool isBossAtEdge ()
     {        
-        RaycastHit2D rightHit;
+        RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
         bool result = false;
-
-        rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
+        
         if (rightHit.collider == null)
         {
             result = true;
@@ -112,12 +101,10 @@ public class Boss : MonoBehaviour
         {
             if (isJumping)
             {
-
                 animator.SetBool("IsFlying", false);
                 Debug.Log("Bug just landed!");
                 //first time we detect ground after the boss lands, pause so he can huff and puff for X seconds                         
                 BossPause(pauseIndex);
-                pauseIndex += 1;
             }
             isJumping = false;
         }
@@ -139,15 +126,7 @@ public class Boss : MonoBehaviour
 
     private void BossPause (int pIndex)
     {
-        float ttp = 0f;
-        try
-        {
-            ttp = bossPause[pIndex];
-            StartCoroutine(BossPauseTimer(ttp));
-        }
-        catch
-        {
-            pauseIndex = 0;            
-        }        
+        StartCoroutine(BossPauseTimer(bossPause[pauseIndex]));
+        pauseIndex = (pIndex + 1) % bossPause.Length;     
     }
 }

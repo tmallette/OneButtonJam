@@ -9,11 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button newGame;
     [SerializeField] private Button continueGame;
     [SerializeField] private Button credits;
+    [SerializeField] private Button respawnGame;
     [SerializeField] private Slider volume;
 
     [SerializeField] private GameObject creditsMenu;
     [SerializeField] private Button back;
-
 
     public static UIManager Instance { get; private set; }
 
@@ -52,6 +52,14 @@ public class UIManager : MonoBehaviour
         volume.onValueChanged.AddListener(SetVolumeSlider);
         credits.onClick.AddListener(()=>ToggleCreditsMenu(true));
         back.onClick.AddListener(()=> ToggleStartMenu(true));
+
+        respawnGame.onClick.AddListener(() =>
+        {
+            if(Player.Instance != null)
+            {
+                Player.Instance.Respawn();
+            }
+        });
     }
 
     public void ToggleStartMenu(bool _toggle)
@@ -96,14 +104,22 @@ public class UIManager : MonoBehaviour
 
         SaveData sd = new SaveData() {
             respawnPoint = 0,
+            scene = 1
         };
 
         SaveSystem.SaveData(sd);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sd.scene);
     }
 
     private void ContinueGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(GameDataManager.Instance.scene);
     }
+
+    public void ToggleRespawnButton()
+    {
+        respawnGame.gameObject.SetActive(true);
+    }
+
+
 }

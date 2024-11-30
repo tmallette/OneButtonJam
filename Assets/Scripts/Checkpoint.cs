@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Checkpoint : MonoBehaviour
         if (player != null)
         {
             if (GameDataManager.Instance != null && savePoint != GameDataManager.Instance.respawnPoint){
-                 GameDataManager.Instance.SaveGame(savePoint);
+                 GameDataManager.Instance.SaveGame(savePoint, SceneManager.GetActiveScene().buildIndex);
             }
             Player.Instance.SetRespawnPoint(respawnPoint.transform.position, facingRight);
         }
