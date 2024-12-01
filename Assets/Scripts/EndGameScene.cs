@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Net.NetworkInformation;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.WSA;
+
 
 public class EndGameScene : MonoBehaviour
 {
@@ -54,7 +50,7 @@ public class EndGameScene : MonoBehaviour
                 if (BossWin)
                 {
                     LittleBossStopTalks();
-                    BigBossTalks("Wow Junkman really? Ever since you made the weather building block you've really dialed it in");
+                    BigBossTalks("Wow Junkman really? Ever since we gave you that big raise you've really dialed it in");
                 }
                 else
                 {
@@ -95,7 +91,7 @@ public class EndGameScene : MonoBehaviour
                 {
                     LittleBossStopTalks();
                     PlayerStopTalks();
-                    BigBossTalks("ENOUGH TROY! WHAT DO YOU EVEN DO HERE... Sorry Junkman, please continue");
+                    BigBossTalks("ENOUGH BARRY! WHAT DO YOU EVEN DO HERE... Sorry Junkman, please continue");
                 }
                 break;
             case 6:
@@ -113,7 +109,7 @@ public class EndGameScene : MonoBehaviour
                 if (BossWin)
                 {
                     PlayerStopTalks();
-                    LittleBossTalks("(*tries to take credit*) Yea deez is the next big thing, it was my idea");
+                    LittleBossTalks("(*Barry tries to take credit*) Yea deez is the next big thing, it was my idea");
                 }
                 else
                 {
@@ -124,7 +120,7 @@ public class EndGameScene : MonoBehaviour
                 if (BossWin)
                 {
                     LittleBossStopTalks();
-                    BigBossTalks("Oh wow! If Troy is excited about deez I know it will be great!");
+                    BigBossTalks("Oh wow! If Barry is excited about deez I know it will be great!");
                 }
                 else
                 {
@@ -190,7 +186,7 @@ public class EndGameScene : MonoBehaviour
                 else
                 {
                     PlayerStopTalks();
-                    BigBossTalks("We need managers less like Troy and more like you Junkman");
+                    BigBossTalks("We need managers less like Barry and more like you Junkman");
                 }
                 break;
             case 14:
@@ -202,7 +198,7 @@ public class EndGameScene : MonoBehaviour
                 }
                 else
                 {
-                    BigBossTalks("In fact I think we should get rid of Troy. Junkman, should we get rid of him... permanently? Yes or No");
+                    BigBossTalks("In fact I think we should get rid of Barry. Junkman, should we get rid of him... permanently? Yes or No");
                 }
                 break;
             case 15:
@@ -214,7 +210,7 @@ public class EndGameScene : MonoBehaviour
                 else
                 {
                     BigBossStopTalks();
-                    PlayerTalks("> Fire Troy! <                        Spare Troy?");
+                    PlayerTalks("> Fire Barry! <                       Spare Troy?");
                 }
                 break;
             case 16:
@@ -222,7 +218,7 @@ public class EndGameScene : MonoBehaviour
                 //kills someone
                 if (BossWin)
                 {
-                    BigBossTalks("Troy, what is deez?");
+                    BigBossTalks("Barry, what is deez?");
                 }
                 else
                 {
@@ -245,7 +241,7 @@ public class EndGameScene : MonoBehaviour
                 if (BossWin)
                 {
                     bossGameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    LittleBossTalks("For the record, what is our policy on having fourths at corporate lunches ?");                    
+                    LittleBossTalks("Since you fired Junkman, can I have his chocolate milk? I haven't eaten second breakfast yet");                    
                 }
                 else
                 {
