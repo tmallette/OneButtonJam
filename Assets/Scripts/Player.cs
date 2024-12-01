@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,17 +13,19 @@ public class Player : MonoBehaviour
     private float holding = 0f;
     private bool isJumping = false;
     private bool holdingJump = false;
-
     public float jumpLowEnd = 3f;
     public float jumpHighEnd = 24f;
-
     public Transform leftRayOrigin;
     public Transform rightRayOrigin;
     public float rayLength = 0.05f;
     public LayerMask groundLayer;
+    public LayerMask finalPlatformLayer;
     private bool grounded = false;
     private Vector2 respawnPoint;
-
+    private bool isOnFinalPlatform = false;
+    public CinemachineCamera cam;
+    public GameObject finalCameraSpot;
+    
     [SerializeField] private Slider power;
 
     public Vector2 playerTrajectory = new Vector2(0.7f, 1f);
@@ -51,6 +54,11 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
 
         trajectory = playerTrajectory;
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 
     private void Update()
@@ -91,6 +99,11 @@ public class Player : MonoBehaviour
 
     private void JumpHoldBegin()
     {
+        if (isOnFinalPlatform)
+        {
+            return;
+        }
+
         power.gameObject.SetActive(true);
         holding = 0;
         holdingJump = true;
@@ -99,6 +112,11 @@ public class Player : MonoBehaviour
 
     private void JumpHoldEnd()
     {
+        if (isOnFinalPlatform)
+        {
+            return;
+        }
+
         animator.SetBool("Crouching", false);
         if (grounded && holdingJump)
         {
@@ -150,6 +168,16 @@ public class Player : MonoBehaviour
         RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
         
         grounded = leftHit.collider != null || rightHit.collider != null;
+
+        RaycastHit2D leftHitFinalPlatform = Physics2D.Raycast(leftRayOrigin.position, Vector2.down, rayLength, finalPlatformLayer);
+        RaycastHit2D rightHitFinalPlatform = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, finalPlatformLayer);
+
+        if (leftHitFinalPlatform.collider != null || rightHitFinalPlatform.collider != null)
+        {
+            //switch the camera settings
+            cam.Target.TrackingTarget = finalCameraSpot.transform;            
+            isOnFinalPlatform = true;            
+        }
     }
 
     public void FlipRight()

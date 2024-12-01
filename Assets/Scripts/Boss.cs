@@ -5,6 +5,7 @@ public class Boss : MonoBehaviour
     public Transform leftRayOrigin;
     public Transform rightRayOrigin;
     public LayerMask groundLayer;
+    public LayerMask finalPlatformLayer;
     public float rayLength = 0.05f;
     public float speed = 50f;
     public bool triggered = false;
@@ -12,8 +13,8 @@ public class Boss : MonoBehaviour
 
     //You can set the jump power values for the boss based on what level design we come up with
     private bool bossPaused = false;
-    private float[] bossJumps = new float[] {11.3f,4.5f,4.5f,15f,9f};
-    private float[] bossPause = new float[] {7f,4f,4f,5f,4f};
+    private float[] bossJumps = new float[] {12.2f,11.3f,4.5f,4.5f,15f,12.5f};
+    private float[] bossPause = new float[] {4f,7f,4f,4f,5f,4f};
     private int jumpIndex = 0;
     private int pauseIndex = 0;    
     private bool isJumping = false;
@@ -21,6 +22,7 @@ public class Boss : MonoBehaviour
     private Animator animator;    
     private bool startBoss = false;
     private SpriteRenderer spriteRenderer;
+    private bool isOnFinalPlatform = false;
 
     public static Boss Instance { get; private set; }
     private void Awake()
@@ -39,7 +41,13 @@ public class Boss : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();        
+        animator = GetComponent<Animator>();      
+        
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 
     private void FixedUpdate()
@@ -51,16 +59,15 @@ public class Boss : MonoBehaviour
         }        
 
         //movement logic
-        if (startBoss && !bossPaused)
-        {
+        if (startBoss && !bossPaused && !isOnFinalPlatform)        
+        {            
             if (isBossAtEdge())
             {
                 if (!isJumping)
                 {
                     isJumping = true;
                     animator.SetBool("IsMoving", false);
-                    animator.SetBool("IsFlying", true);
-                    Debug.Log("Bug just jumped! isJumping=" + isJumping);
+                    animator.SetBool("IsFlying", true);                    
                     Jump();
                 }
             }
@@ -91,7 +98,20 @@ public class Boss : MonoBehaviour
     private bool isBossAtEdge ()
     {        
         RaycastHit2D rightHit = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, groundLayer);
+        RaycastHit2D rightHitForFinalPlatform = Physics2D.Raycast(rightRayOrigin.position, Vector2.down, rayLength, finalPlatformLayer);
         bool result = false;
+
+        if (rightHitForFinalPlatform.collider != null)
+        {
+            isOnFinalPlatform = true;                        
+            BossPause(pauseIndex);            
+            animator.SetBool("IsBreathing", false);
+            animator.SetBool("IsFlying", false);
+            animator.SetBool("IsMoving", false);
+            animator.SetBool("IsIdle", true);
+            spriteRenderer.flipX = true;
+            return result;
+        }
         
         if (rightHit.collider == null)
         {
@@ -101,8 +121,7 @@ public class Boss : MonoBehaviour
         {
             if (isJumping)
             {
-                animator.SetBool("IsFlying", false);
-                Debug.Log("Bug just landed!");
+                animator.SetBool("IsFlying", false);                
                 //first time we detect ground after the boss lands, pause so he can huff and puff for X seconds                         
                 BossPause(pauseIndex);
             }
