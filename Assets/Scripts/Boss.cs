@@ -41,7 +41,13 @@ public class Boss : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();        
+        animator = GetComponent<Animator>();      
+        
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 
     private void FixedUpdate()

@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
         trajectory = playerTrajectory;
     }
 
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
+
     private void Update()
     {
         GroundCheck();
