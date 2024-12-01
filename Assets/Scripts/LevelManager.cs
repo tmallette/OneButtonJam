@@ -41,14 +41,11 @@ public class LevelManager : MonoBehaviour
         {
             respawnPoint = GameDataManager.Instance.respawnPoint;
         }
+
         if (startOfLevel)
         {
             startOfLevel = false;
-            Player.Instance.SetRespawnPoint(new Vector2(startPosition.position.x,startPosition.position.y), true);
-            Player.Instance.Respawn();
-        }
-        else
-        {
+
             if (respawnPoint > -1)
             {
                 Debug.Log("checkPoints.Length " + checkPoints.Length);
@@ -57,8 +54,13 @@ public class LevelManager : MonoBehaviour
                 Vector2 position = checkPoints[respawnPoint].GetPosition();
 
                 Player.Instance.SetRespawnPoint(position, facing);
-                Player.Instance.Respawn();
+            } 
+            else
+            {
+                Player.Instance.SetRespawnPoint(new Vector2(startPosition.position.x, startPosition.position.y), true);
             }
+
+            Player.Instance.Respawn();
         }
     }
 }

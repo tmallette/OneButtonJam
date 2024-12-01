@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
 
     private void SetupButtons()
     {
-        if(GameDataManager.Instance.respawnPoint>0)
+        if(GameDataManager.Instance.respawnPoint > 0 || GameDataManager.Instance.scene > 1)
         {
             continueGame.gameObject.SetActive(true);
         }

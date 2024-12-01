@@ -21,12 +21,15 @@ public class GameDataManager : MonoBehaviour
         }
 
         saveData = SaveSystem.LoadData();
+        Debug.Log("Loading: " + saveData[0] + " | " + saveData[1]);
         respawnPoint = saveData[0];
         scene = saveData[1];
 }
 
     public void SaveGame(int _repsawnPoint, int _scene)
     {
+        Debug.Log("Saving: " + _repsawnPoint + " | " + _scene);
+
         respawnPoint = _repsawnPoint;
 
         SaveData sd = new SaveData() {
