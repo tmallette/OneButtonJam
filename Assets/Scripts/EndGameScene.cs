@@ -4,6 +4,7 @@ using System.Net.NetworkInformation;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class EndGameScene : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EndGameScene : MonoBehaviour
     public TextMeshProUGUI playerTMP;
     public TextMeshProUGUI bossTMP;
     public TextMeshProUGUI endBossTMP;
+    public GameObject neutralCanvas;
     private bool endSceneStarted = false;
     private int endSceneStep = 0;
     private bool BossWin = false;
@@ -39,9 +41,7 @@ public class EndGameScene : MonoBehaviour
             case 1:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-                    
+                    LittleBossTalks("Junkman has been watching cartoons and drinking chocolate milk instead of working");    
                 }
                 else
                 {
@@ -52,22 +52,20 @@ public class EndGameScene : MonoBehaviour
             case 2:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    LittleBossStopTalks();
+                    BigBossTalks("Wow Junkman really? Ever since you made the weather building block you've really dialed it in");
                 }
                 else
                 {
                     PlayerStopTalks();
-                    BigBossTalks("What is it Chad?");
+                    BigBossTalks("What is it Junkman?");
                 }
                 break;
             case 3:
                 if (BossWin)
                 {
                     BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerTalks("Everyone has a down week. I'm starting to work on... *adhd moment*");
                 }
                 else
                 {
@@ -78,35 +76,31 @@ public class EndGameScene : MonoBehaviour
             case 4:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerStopTalks();
+                    BigBossTalks("You are starting to work on what?");
                 }
                 else
                 {
-                    LittleBossTalks("Chad hasn't done any work all day!!! All he does is talk to people");
+                    LittleBossTalks("Junkman hasn't done any work all day!!! All he does is talk to people");
                 }
                 break;
             case 5:
                 if (BossWin)
                 {
                     BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerTalks("*continues to have intense adhd moment*");
                 }
                 else
                 {
                     LittleBossStopTalks();
                     PlayerStopTalks();
-                    BigBossTalks("ENOUGH TROY! WHAT DO YOU EVEN DO HERE... Sorry Chad, please continue");
+                    BigBossTalks("ENOUGH TROY! WHAT DO YOU EVEN DO HERE... Sorry Junkman, please continue");
                 }
                 break;
             case 6:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerTalks("*squirrel finally runs away* ...starting to work on deez"); 
                 }
                 else
                 {
@@ -117,9 +111,8 @@ public class EndGameScene : MonoBehaviour
             case 7:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerStopTalks();
+                    LittleBossTalks("(*tries to take credit*) Yea deez is the next big thing, it was my idea");
                 }
                 else
                 {
@@ -129,9 +122,8 @@ public class EndGameScene : MonoBehaviour
             case 8:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    LittleBossStopTalks();
+                    BigBossTalks("Oh wow! If Troy is excited about deez I know it will be great!");
                 }
                 else
                 {
@@ -142,21 +134,19 @@ public class EndGameScene : MonoBehaviour
             case 9:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerTalks("*snickering quietly*");
                 }
                 else
                 {
                     BigBossStopTalks();
-                    PlayerTalks("It seems like the morale across the team is starting to dip, and I believe a raise for everyone could really help boost the team’s motivation");
-                    
+                    PlayerTalks("It seems like the morale across the team is starting to dip, and I believe a raise for everyone could really help boost the team’s motivation");                    
                 }
                 break;                
             case 10:
                 if (BossWin)
                 {
-
+                    PlayerStopTalks();
+                    BigBossTalks("Junkman, what is deez?");
                 }
                 else
                 {
@@ -166,8 +156,10 @@ public class EndGameScene : MonoBehaviour
                 break;
             case 11:
                 if (BossWin)
-                {                    
-
+                {
+                    //if I could zoom in on his face until a mouse click I would
+                    BigBossStopTalks();
+                    LittleBossTalks("Yea, what is deez? Can you elaborate?");
                 }
                 else
                 {
@@ -178,9 +170,10 @@ public class EndGameScene : MonoBehaviour
             case 12:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    LittleBossStopTalks();
+                    //add a new canvas so I can have crickets sounds int he middle of the screen
+                    neutralCanvas.SetActive(true);
+                    neutralCanvas.GetComponentInChildren<TextMeshProUGUI>().SetText("**crickets**");
                 }
                 else
                 {                    
@@ -190,34 +183,32 @@ public class EndGameScene : MonoBehaviour
             case 13:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    //more crickets
+                    neutralCanvas.GetComponentInChildren<TextMeshProUGUI>().SetText("**crickets continue**");
                 }
                 else
                 {
                     PlayerStopTalks();
-                    BigBossTalks("We need managers less like Troy and more like you Chad");
+                    BigBossTalks("We need managers less like Troy and more like you Junkman");
                 }
                 break;
             case 14:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    //hide the middle canvas
+                    neutralCanvas.SetActive(false);
+                    PlayerTalks("Ligma balls");
                 }
                 else
                 {
-                    BigBossTalks("In fact I think we should get rid of Troy. Chad, should we get rid of him... permanently? Yes or No");
+                    BigBossTalks("In fact I think we should get rid of Troy. Junkman, should we get rid of him... permanently? Yes or No");
                 }
                 break;
             case 15:
                 if (BossWin)
                 {
-                    BigBossStopTalks();
-                    PlayerTalks("I came to tell you that");
-
+                    PlayerStopTalks();
+                    Player.Instance.GetAnimator().SetBool("IsDead", true);
                 }
                 else
                 {
@@ -230,16 +221,69 @@ public class EndGameScene : MonoBehaviour
                 //kills someone
                 if (BossWin)
                 {
-                    Player.Instance.GetAnimator().SetBool("IsDead", true);
-                    //kill User
+                    BigBossTalks("Troy, what is deez?");
                 }
                 else
                 {
                     PlayerStopTalks();
                     Boss.Instance.GetAnimator().SetBool("IsDead", true);                    
-                }
-                
+                }                
                 break;
+            case 17:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    LittleBossTalks("Let me google it... it stands for Deez nuts. Must be a food program or something");                    
+                }
+                else
+                {
+                    
+                }
+                break;
+            case 18:
+                if (BossWin)
+                {
+                    LittleBossTalks("For the record, what is our policy on having fourths at corporate lunches ?");                    
+                }
+                else
+                {
+
+                }
+                break;
+            case 19:
+                if (BossWin)
+                {
+                    LittleBossStopTalks();
+                    neutralCanvas.SetActive(true);
+                    neutralCanvas.GetComponentInChildren<TextMeshProUGUI>().SetText("**awkward silence**");
+                }
+                else
+                {
+
+                }
+                break;
+            case 20:
+                if (BossWin)
+                {
+                    neutralCanvas.SetActive(false);
+                    BigBossTalks("God you are the worst");
+                }
+                else
+                {
+
+                }
+                break;
+            case 21:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    Boss.Instance.GetAnimator().SetBool("IsDead", true);
+                }
+                else
+                {
+
+                }
+                break;               
         }
 
     }
