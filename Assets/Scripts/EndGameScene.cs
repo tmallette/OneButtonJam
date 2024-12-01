@@ -16,6 +16,7 @@ public class EndGameScene : MonoBehaviour
     public TextMeshProUGUI bossTMP;
     public TextMeshProUGUI endBossTMP;
     public GameObject neutralCanvas;
+    public GameObject bossGameObject;
     private bool endSceneStarted = false;
     private int endSceneStep = 0;
     private bool BossWin = false;
@@ -243,6 +244,7 @@ public class EndGameScene : MonoBehaviour
             case 18:
                 if (BossWin)
                 {
+                    bossGameObject.GetComponent<SpriteRenderer>().flipX = false;
                     LittleBossTalks("For the record, what is our policy on having fourths at corporate lunches ?");                    
                 }
                 else

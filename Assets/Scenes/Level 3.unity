@@ -8975,6 +8975,7 @@ MonoBehaviour:
   bossTMP: {fileID: 1075721090}
   endBossTMP: {fileID: 1453014666}
   neutralCanvas: {fileID: 1503590072}
+  bossGameObject: {fileID: 2023744336}
 --- !u!1 &1993783447
 GameObject:
   m_ObjectHideFlags: 0
