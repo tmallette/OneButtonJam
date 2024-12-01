@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using System.Net.NetworkInformation;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EndGameScene : MonoBehaviour
@@ -34,18 +37,195 @@ public class EndGameScene : MonoBehaviour
         switch (endSceneStep)
         {
             case 1:
-                BigBossStopTalks();
-                PlayerTalks("Trying to get laid.");
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+                    
+                }
+                else
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("Hey, I wanted to take a moment to discuss something that I think is really important for the team");
+                }                
                 break;
             case 2:
-                PlayerStopTalks();
-                LittleBossTalks("See he should be Fired");
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    PlayerStopTalks();
+                    BigBossTalks("What is it Chad?");
+                }
                 break;
             case 3:
-                LittleBossStopTalks();
-                BigBossTalks("I dont give a fuck. You're his manager. Your done Kiddo!");
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that...");
+                }
                 break;
             case 4:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    LittleBossTalks("Chad hasn't done any work all day!!! All he does is talk to people");
+                }
+                break;
+            case 5:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    LittleBossStopTalks();
+                    PlayerStopTalks();
+                    BigBossTalks("ENOUGH TROY! WHAT DO YOU EVEN DO HERE... Sorry Chad, please continue");
+                }
+                break;
+            case 6:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I have been talking to people because I want to make things better. As you know, we’ve all been putting in a lot of hard work lately");
+                }
+                break;                
+            case 7:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    PlayerTalks("Everyone has been stepping up, working overtime, and staying committed to delivering results");
+                }
+                break;
+            case 8:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    PlayerStopTalks();
+                    BigBossTalks("...listening intently...");
+                }
+                break;
+            case 9:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("It seems like the morale across the team is starting to dip, and I believe a raise for everyone could really help boost the team’s motivation");
+                    
+                }
+                break;                
+            case 10:
+                if (BossWin)
+                {
+
+                }
+                else
+                {
+                    PlayerStopTalks();
+                    BigBossTalks("...");
+                }
+                break;
+            case 11:
+                if (BossWin)
+                {                    
+
+                }
+                else
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("When employees feel valued and see that their efforts are being recognized financially, they’re more likely to continue putting in their best work");
+                }
+                break;
+            case 12:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {                    
+                    BigBossTalks("...");
+                }
+                break;
+            case 13:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    PlayerStopTalks();
+                    BigBossTalks("We need managers less like Troy and more like you Chad");
+                }
+                break;
+            case 14:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    BigBossTalks("In fact I think we should get rid of Troy. Chad, should we get rid of him... permanently? Yes or No");
+                }
+                break;
+            case 15:
+                if (BossWin)
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("I came to tell you that");
+
+                }
+                else
+                {
+                    BigBossStopTalks();
+                    PlayerTalks("> Fire Troy! <                        Spare Troy?");
+                }
+                break;
+            case 16:
                 BigBossStopTalks();
                 //kills someone
                 if (BossWin)
@@ -55,8 +235,8 @@ public class EndGameScene : MonoBehaviour
                 }
                 else
                 {
-                    Boss.Instance.GetAnimator().SetBool("IsDead", true);
-                    //kil Boss
+                    PlayerStopTalks();
+                    Boss.Instance.GetAnimator().SetBool("IsDead", true);                    
                 }
                 
                 break;
@@ -100,7 +280,7 @@ public class EndGameScene : MonoBehaviour
         if (endSceneStarted == false)
         {
             endSceneStarted = true;
-            BigBossTalks("What on earth are you doing here? Why aren't you at your machine?");
+            BigBossTalks("I had better hear a good reason for why you aren't working right now...");
         }
     }
 
