@@ -42,8 +42,14 @@ TagManager:
   - name: Background
     uniqueID: 1855384297
     locked: 0
+  - name: Signs
+    uniqueID: 694825899
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Arrows
+    uniqueID: 761784199
     locked: 0
   m_RenderingLayers:
   - Default
