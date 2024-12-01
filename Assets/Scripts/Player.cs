@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,9 @@ public class Player : MonoBehaviour
     private bool grounded = false;
     private Vector2 respawnPoint;
     private bool isOnFinalPlatform = false;
-
+    public CinemachineCamera cam;
+    public GameObject finalCameraSpot;
+    
     [SerializeField] private Slider power;
 
     public Vector2 playerTrajectory = new Vector2(0.7f, 1f);
@@ -166,7 +169,9 @@ public class Player : MonoBehaviour
 
         if (leftHitFinalPlatform.collider != null || rightHitFinalPlatform.collider != null)
         {
-            isOnFinalPlatform = true;
+            //switch the camera settings
+            cam.Target.TrackingTarget = finalCameraSpot.transform;            
+            isOnFinalPlatform = true;            
         }
     }
 

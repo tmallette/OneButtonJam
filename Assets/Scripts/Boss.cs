@@ -13,8 +13,8 @@ public class Boss : MonoBehaviour
 
     //You can set the jump power values for the boss based on what level design we come up with
     private bool bossPaused = false;
-    private float[] bossJumps = new float[] {11.3f,4.5f,4.5f,15f,12.5f};
-    private float[] bossPause = new float[] {7f,4f,4f,5f,4f};
+    private float[] bossJumps = new float[] {12.2f,11.3f,4.5f,4.5f,15f,12.5f};
+    private float[] bossPause = new float[] {4f,7f,4f,4f,5f,4f};
     private int jumpIndex = 0;
     private int pauseIndex = 0;    
     private bool isJumping = false;
@@ -61,8 +61,7 @@ public class Boss : MonoBehaviour
                 {
                     isJumping = true;
                     animator.SetBool("IsMoving", false);
-                    animator.SetBool("IsFlying", true);
-                    Debug.Log("Bug just jumped! isJumping=" + isJumping);
+                    animator.SetBool("IsFlying", true);                    
                     Jump();
                 }
             }
@@ -104,6 +103,7 @@ public class Boss : MonoBehaviour
             animator.SetBool("IsFlying", false);
             animator.SetBool("IsMoving", false);
             animator.SetBool("IsIdle", true);
+            spriteRenderer.flipX = true;
             return result;
         }
         
